@@ -1,11 +1,23 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: ReplicationController
 metadata:
-  name: meta-name
-  labels:
-    app: label-app
-    type: front-end
+  name: rep-1-meta
+  type: front-end
 spec:
-  containers:
-    - name: nginx
-      image: nginx
+  template:
+    metadata:
+    name: rep-pod-meta
+    labels:
+      type: front-end
+    spec:
+      containers:
+        - name: my
+          image: nginx
+
+      replecas: 3
+
+    selector:
+      matchlabels:
+        type: front-end
+
+
