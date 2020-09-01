@@ -6,3 +6,6 @@
  apt install ssh-askpass
  ssh-keyscan -t rsa bitbucket.org >> ~/.ssh/known_hosts
  git push origin master
+
+
+OK!
