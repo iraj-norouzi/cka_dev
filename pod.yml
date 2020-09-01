@@ -1,23 +1,21 @@
 apiVersion: apps/v1
-kind: ReplicationController
+kind: ReplicaSet
 metadata:
-  name: rep-1-meta
-  type: front-end
+  name: frontend
+  labels:
+    app: guestbook
+    tier: frontend
 spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
   template:
     metadata:
-    name: rep-pod-meta
-    labels:
-      type: front-end
+      labels:
+        tier: frontend
     spec:
       containers:
-        - name: my
-          image: nginx
-
-      replecas: 3
-
-    selector:
-      matchlabels:
-        type: front-end
-
-
+      - name: php-redis
+        image: gcr.io/google_samples/gb-frontend:v3
